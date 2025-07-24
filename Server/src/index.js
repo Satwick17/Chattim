@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import { connectDB } from "./lib/db.js";
 import authRoutes from "./routes/app.routes.js"; // Assuming you have an auth.routes.js file
+import messageRoutes from "./routes/message.route.js"; // Assuming you have a message.route.js file
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -12,6 +13,7 @@ app.use(express.json()); // Middleware to parse JSON bodies
 app.use(cookieParser()); // Middleware to parse cookies
 
 app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
 
 app.listen(Port, () => {
   console.log("Server is running on port:" + Port);
