@@ -136,3 +136,31 @@ export const checkAuth = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const sendMessage = async (req, res) => {
+  try {
+    const { text, image } = req.body;
+    const { id: receiverId } = req.params;
+    const senderId = req.user._id;
+
+    let imageUrl;
+    if (image) {
+      const uploadedImage = await cloudinary.uploader.upload(image);
+      imageUrl = uploadedImage.secure_url;
+    }
+
+    const newMessage = new Message({
+      senderId,
+      receiverId,
+      text,
+      image: imageUrl,
+    });
+
+    await newMessage.save();
+    res.status(201).json(newMessage);
+    
+  } catch (error) {
+    console.error("Error sending message:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
