@@ -42,7 +42,7 @@ export const signup = async (req, res) => {
           _id: newUser._id,
           email: newUser.email,
           fullName: newUser.fullName,
-          profilePicture: newUser.profilePicture,
+          profilePic: newUser.profilePic,
         },
       });
     } else {
@@ -81,7 +81,7 @@ export const login = async (req, res) => {
         _id: user._id,
         email: user.email,
         fullName: user.fullName,
-        profilePicture: user.profilePicture,
+        profilePic: user.profilePic,
       },
     });
   } catch (error) {
@@ -112,6 +112,7 @@ export const updateProfile = async (req, res) => {
     }
 
     const uploadedPic = await cloudinary.uploader.upload(profilePic);
+
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { profilePic: uploadedPic.secure_url },
@@ -158,7 +159,6 @@ export const sendMessage = async (req, res) => {
 
     await newMessage.save();
     res.status(201).json(newMessage);
-    
   } catch (error) {
     console.error("Error sending message:", error);
     res.status(500).json({ message: "Internal server error" });

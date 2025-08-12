@@ -2,6 +2,7 @@ import React from "react";
 import { useAuthStore } from "../../store/useAuthStore";
 import { LogOut, MessageSquare, Settings, User } from "lucide-react";
 import { Link } from "react-router-dom";
+import Logo from "../assests/chattim_0.png";
 
 const Navbar = () => {
   const { authUser, logout } = useAuthStore();
@@ -15,10 +16,12 @@ const Navbar = () => {
               to="/"
               className="flex items-center gap-2.5 hover:opacity-80 transition-all"
             >
-              <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
-                <MessageSquare className="w-5 h-5 text-primary" />
+              <div className="mt-2.5 pt-2 flex items-center justify-center">
+                {/* <MessageSquare className="w-5 h-5 text-primary" /> */}
+                <img src={Logo} className="w-43 h-33 " />
               </div>
-              <h1 className="text-lg font-bold">Chattim</h1>
+
+              {/* <h1 className="text-lg font-bold">Chattim</h1> */}
             </Link>
           </div>
 
