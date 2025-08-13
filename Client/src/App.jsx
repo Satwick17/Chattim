@@ -9,9 +9,11 @@ import SettingsPage from "./pages/SettingsPage";
 import ProfilePage from "./pages/ProfilePage";
 import { Ellipsis } from "lucide-react";
 import { Toaster } from "react-hot-toast";
+import { usethemeStore } from "../store/useThemeStore";
 
 const App = () => {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
+  const { theme } = usethemeStore();
 
   useEffect(() => {
     checkAuth();
@@ -27,7 +29,7 @@ const App = () => {
     );
   }
   return (
-    <>
+    <div data-theme={theme}>
       <Navbar />
       <Routes>
         <Route
@@ -49,8 +51,8 @@ const App = () => {
         />
       </Routes>
 
-      <Toaster/>
-    </>
+      <Toaster />
+    </div>
   );
 };
 
