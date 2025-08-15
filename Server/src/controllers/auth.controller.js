@@ -1,6 +1,7 @@
 import cloudinary from "../lib/cloudinary.js";
 import { generateToken } from "../lib/util.js";
 import User from "../model/users.model.js";
+import Message from "../model/messages.model.js";
 import bcrypt from "bcryptjs";
 
 export const signup = async (req, res) => {
@@ -112,7 +113,7 @@ export const updateProfile = async (req, res) => {
     }
 
     const uploadedPic = await cloudinary.uploader.upload(profilePic);
-  
+
     const updatedUser = await User.findByIdAndUpdate(
       userId,
       { profilePic: uploadedPic.secure_url },
